@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经营日报快捷查询系统</title>
+    <style>
+        /* 让应用撑满整个屏幕，不留白边 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        #app {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+    <!-- 应用渲染的容器 -->
+    <div id="app"></div>
+
+    <script type="text/javascript">
+        var webSdkScript = document.createElement('script');
+        // 【核心修正】修复了之前导致 404 的双斜杠问题
+        webSdkScript.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/builder-web-sdk/1.0.3/dist/umd/index.js';
+        document.head.appendChild(webSdkScript);
+
+        webSdkScript.onload = function () {
+            new CozeWebSDK.AppWebSDK({
+                "token": "pat_gmZgYM5cokAq4x9jlQBPeAgBZh4Z9sCjNBVDIHSPinmKp0M6TeOt0Vca2DWBgR8I",
+                "appId": "7619970092746670126",
+                "container": "#app",
+                "userInfo": {
+                    "id": "user_001",
+                    "nickname": "管理员"
+                }
+            });
+        };
+
+        // 如果加载失败的备用提示
+        webSdkScript.onerror = function() {
+            document.body.innerHTML = "<h1>加载失败，请检查网络或刷新页面。</h1>";
+        };
+    </script>
+</body>
+</html>
